@@ -75,3 +75,25 @@ def calc_forward_rate(dates, spotRates):
         return ValueError
 
 
+# Function responsible for calculating the value of the balanced forward price based on domestic 
+# and international rates and spot rate.
+def calc_pte(rc, rd, ri, t, b):
+    '''
+    Calculate the value of the balanced forward price
+    Args:
+    =====
+    rc (numpy.array): spot exchange rate
+    rd (numpy.array): domestic interest rate
+    ri (numpy.array): international interest rate
+    t (float): time interval
+    b (float): calculation convention (basis)
+    Returns:
+    ========
+    pte (numpy.array): balanced forward price
+    '''
+    try:
+        pte = rc * ( 1.0 + rd)**(t/b)/(1.0 + ri * (t/b))
+        return pte
+    except:
+        return None
+
